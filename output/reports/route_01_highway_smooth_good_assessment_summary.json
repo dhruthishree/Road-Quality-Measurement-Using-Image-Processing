@@ -1,0 +1,55 @@
+{
+  "summary": {
+    "total_survey_distance_m": 100.0,
+    "total_segments_surveyed": 2,
+    "total_unique_potholes": 0,
+    "total_unique_cracks": 0,
+    "total_defect_area_m2": 0,
+    "overall_average_rqi": 95.2,
+    "overall_rating": "Good",
+    "good_segments_count": 2,
+    "fair_segments_count": 0,
+    "bad_segments_count": 0
+  },
+  "segments": [
+    {
+      "segment_id": 0,
+      "chainage_start_m": 0.0,
+      "chainage_end_m": 50.0,
+      "length_m": 50.0,
+      "pothole_count": 0,
+      "crack_count": 0,
+      "patch_count": 0,
+      "total_defects": 0,
+      "pothole_area_m2": 0,
+      "crack_area_m2": 0,
+      "total_defect_area_m2": 0,
+      "defect_density_pct": 0.0,
+      "mean_grade_pct": -20.06,
+      "grade_std_pct": 2.29,
+      "rqi_score": 90.4,
+      "quality_rating": "Good",
+      "action_recommendation": "Pavement in Good condition. Routine preventative maintenance / sweeping."
+    },
+    {
+      "segment_id": 1,
+      "chainage_start_m": 50.0,
+      "chainage_end_m": 100.0,
+      "length_m": 50.0,
+      "pothole_count": 0,
+      "crack_count": 0,
+      "patch_count": 0,
+      "total_defects": 0,
+      "pothole_area_m2": 0,
+      "crack_area_m2": 0,
+      "total_defect_area_m2": 0,
+      "defect_density_pct": 0.0,
+      "mean_grade_pct": -20.6,
+      "grade_std_pct": 0.49,
+      "rqi_score": 100.0,
+      "quality_rating": "Good",
+      "action_recommendation": "Pavement in Good condition. Routine preventative maintenance / sweeping."
+    }
+  ],
+  "defects": []
+}

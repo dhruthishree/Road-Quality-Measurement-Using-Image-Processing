@@ -1,0 +1,84 @@
+{
+  "summary": {
+    "total_survey_distance_m": 100.0,
+    "total_segments_surveyed": 2,
+    "total_unique_potholes": 2,
+    "total_unique_cracks": 0,
+    "total_defect_area_m2": 0.191,
+    "overall_average_rqi": 81.3,
+    "overall_rating": "Good",
+    "good_segments_count": 1,
+    "fair_segments_count": 1,
+    "bad_segments_count": 0
+  },
+  "segments": [
+    {
+      "segment_id": 0,
+      "chainage_start_m": 0.0,
+      "chainage_end_m": 50.0,
+      "length_m": 50.0,
+      "pothole_count": 1,
+      "crack_count": 0,
+      "patch_count": 0,
+      "total_defects": 1,
+      "pothole_area_m2": 0.108,
+      "crack_area_m2": 0,
+      "total_defect_area_m2": 0.108,
+      "defect_density_pct": 0.03,
+      "mean_grade_pct": -18.67,
+      "grade_std_pct": 2.62,
+      "rqi_score": 77.2,
+      "quality_rating": "Fair",
+      "action_recommendation": "Minor distress. Surface crack sealing and micro-surfacing recommended."
+    },
+    {
+      "segment_id": 1,
+      "chainage_start_m": 50.0,
+      "chainage_end_m": 100.0,
+      "length_m": 50.0,
+      "pothole_count": 1,
+      "crack_count": 0,
+      "patch_count": 0,
+      "total_defects": 1,
+      "pothole_area_m2": 0.083,
+      "crack_area_m2": 0,
+      "total_defect_area_m2": 0.083,
+      "defect_density_pct": 0.02,
+      "mean_grade_pct": -19.6,
+      "grade_std_pct": 1.75,
+      "rqi_score": 85.4,
+      "quality_rating": "Good",
+      "action_recommendation": "Pavement in Good condition. Routine preventative maintenance / sweeping."
+    }
+  ],
+  "defects": [
+    {
+      "track_id": 5,
+      "type": "pothole",
+      "first_frame": 48,
+      "last_frame": 50,
+      "frames_tracked": 2,
+      "smoothed_area_m2": 0.108,
+      "smoothed_length_m": 0.51,
+      "smoothed_width_m": 0.35,
+      "severity": 5,
+      "confidence": 0.98,
+      "chainage_distance_m": 30.62,
+      "is_confirmed": false
+    },
+    {
+      "track_id": 7,
+      "type": "pothole",
+      "first_frame": 114,
+      "last_frame": 116,
+      "frames_tracked": 2,
+      "smoothed_area_m2": 0.083,
+      "smoothed_length_m": 0.59,
+      "smoothed_width_m": 0.25,
+      "severity": 5,
+      "confidence": 0.98,
+      "chainage_distance_m": 71.88,
+      "is_confirmed": false
+    }
+  ]
+}

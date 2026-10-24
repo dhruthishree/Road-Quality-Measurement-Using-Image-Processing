@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyTorch checkpoints / model weights (exclude raw dataset caches, keep exported weights)
+dataset/indian_roads_dataset/
+dataset/real_road_dataset/
+dataset/rdd2020_india/
+dataset/routes/
+*.zip
+*.tar
+*.parquet
+
+# Virtual environments
+venv/
+env/
+.env
+
+# IDE / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Temporary logs
+*.log

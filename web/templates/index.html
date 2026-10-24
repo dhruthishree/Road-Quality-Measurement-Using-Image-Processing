@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoRoad AI | Intelligent Continuous Road Quality Measurement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Chart.js for continuous quality telemetric charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Top Navigation Bar -->
+        <header class="top-nav">
+            <div class="nav-brand">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19L9 5h6l5 14"/>
+                        <path d="M12 8v3"/>
+                        <path d="M12 15v3"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="brand-title">AutoRoad <span class="brand-gradient">Vision AI</span></h1>
+                    <p class="brand-subtitle">Continuous Pavement Distress & Inclination Measurement</p>
+                </div>
+            </div>
+
+            <div class="nav-actions">
+                <div class="route-select-wrapper">
+                    <label for="routeSelect">Survey Route:</label>
+                    <select id="routeSelect" class="route-dropdown">
+                        {% for r in routes %}
+                        <option value="{{ r.name }}">{{ r.name }} ({{ r.size_mb }}MB)</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button id="btnRunSurvey" class="btn-primary">
+                    <span class="btn-icon">▶</span> Run Full Survey
+                </button>
+
+                <label class="btn-secondary upload-label">
+                    <span class="btn-icon">📁</span> Upload Video
+                    <input type="file" id="videoUploadInput" accept="video/mp4,video/avi" style="display:none;">
+                </label>
+            </div>
+        </header>
+
+        <!-- KPI Summary Cards Row -->
+        <section class="kpi-banner">
+            <div class="kpi-card" id="kpiRqiCard">
+                <div class="kpi-header">
+                    <span class="kpi-label">Road Quality Index (RQI)</span>
+                    <span class="kpi-pill good" id="badgeQualityStatus">GOOD</span>
+                </div>
+                <div class="kpi-metric-row">
+                    <span class="kpi-val" id="valRqi">--</span>
+                    <span class="kpi-unit">/ 100</span>
+                </div>
+                <div class="kpi-sub" id="txtAstmLevel">ASTM D6433 Standard Aligned</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-label">Surveyed Chainage</span>
+                    <span class="kpi-icon">📏</span>
+                </div>
+                <div class="kpi-metric-row">
+                    <span class="kpi-val" id="valDistance">0.0</span>
+                    <span class="kpi-unit">meters</span>
+                </div>
+                <div class="kpi-sub" id="txtSegmentsCount">0 discrete 50m segments</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-label">Unique Potholes</span>
+                    <span class="kpi-icon" style="color: #ef4444;">⚠</span>
+                </div>
+                <div class="kpi-metric-row">
+                    <span class="kpi-val text-danger" id="valPotholes">0</span>
+                    <span class="kpi-unit">cavities</span>
+                </div>
+                <div class="kpi-sub" id="valPotholeArea">0.00 m² total surface damage</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-label">Fatigue & Joint Cracks</span>
+                    <span class="kpi-icon" style="color: #f59e0b;">⚡</span>
+                </div>
+                <div class="kpi-metric-row">
+                    <span class="kpi-val text-warning" id="valCracks">0</span>
+                    <span class="kpi-unit">linear/alligator</span>
+                </div>
+                <div class="kpi-sub" id="valCrackArea">0.00 m² cracked area</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-label">Pavement Defect Density</span>
+                    <span class="kpi-icon" style="color: #3b82f6;">📊</span>
+                </div>
+                <div class="kpi-metric-row">
+                    <span class="kpi-val" id="valDensity">0.0%</span>
+                    <span class="kpi-unit">of area</span>
+                </div>
+                <div class="kpi-sub" id="valTotalDamageArea">0.00 m² damaged / total m²</div>
+            </div>
+        </section>
+
+        <!-- Main Studio Viewport -->
+        <main class="main-workspace">
+            <!-- Left: Video Stream & View Mode Selector -->
+            <div class="video-panel">
+                <div class="panel-header">
+                    <div class="feed-status-dot"></div>
+                    <span class="panel-title" id="lblFeedTitle">Live Survey Feed & Geometric Analytics</span>
+                    <div class="view-toggles">
+                        <button id="btnViewAnnotated" class="toggle-btn active">Perspective (HUD)</button>
+                        <button id="btnViewIPM" class="toggle-btn">Bird's Eye (IPM)</button>
+                    </div>
+                </div>
+
+                <div class="video-viewport">
+                    <img id="streamPlayer" src="" alt="Road Survey Stream" class="stream-img">
+                    <div id="videoPlaceholder" class="stream-placeholder">
+                        <div class="placeholder-icon">🚗</div>
+                        <div class="placeholder-text">Click <strong>"Run Full Survey"</strong> to initiate continuous measurement</div>
+                    </div>
+                </div>
+
+                <!-- Live Telemetry HUD Bar under video -->
+                <div class="telemetry-bar">
+                    <div class="telem-item">
+                        <span class="telem-lbl">SPEED</span>
+                        <span class="telem-val" id="hudSpeed">45.0 km/h</span>
+                    </div>
+                    <div class="telem-item">
+                        <span class="telem-lbl">ROAD GRADE</span>
+                        <span class="telem-val text-cyan" id="hudGrade">+1.2%</span>
+                    </div>
+                    <div class="telem-item">
+                        <span class="telem-lbl">PITCH ANGLE</span>
+                        <span class="telem-val" id="hudPitch">1.1°</span>
+                    </div>
+                    <div class="telem-item">
+                        <span class="telem-lbl">ACTIVE SEGMENT</span>
+                        <span class="telem-val text-purple" id="hudSegment">#1 (0-50m)</span>
+                    </div>
+                    <div class="telem-item">
+                        <span class="telem-lbl">HORIZON (VP)</span>
+                        <span class="telem-val" id="hudHorizon">y = 316px</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Interactive Civil Engineering Insights Panel -->
+            <div class="insights-panel">
+                <!-- Tab Controls -->
+                <div class="tab-header">
+                    <button class="tab-btn active" data-tab="tab-chart">Continuous Profile</button>
+                    <button class="tab-btn" data-tab="tab-segments">Segment Matrix</button>
+                    <button class="tab-btn" data-tab="tab-defects">Defect Catalog</button>
+                    <button class="tab-btn" data-tab="tab-gaps">5 Solved Gaps</button>
+                </div>
+
+                <!-- Tab 1: Continuous Quality Profile Chart -->
+                <div id="tab-chart" class="tab-pane active">
+                    <div class="chart-container">
+                        <canvas id="roadProfileChart"></canvas>
+                    </div>
+                    <div class="chart-notes">
+                        <span>● RQI (Road Quality Index: 0-100)</span>
+                        <span>● Road Grade / Slope (%)</span>
+                        <span>■ Segments with RQI &lt; 60 require immediate resurfacing</span>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Segment-by-Segment Matrix -->
+                <div id="tab-segments" class="tab-pane">
+                    <div class="table-scroll-container">
+                        <table class="data-table" id="segmentsTable">
+                            <thead>
+                                <tr>
+                                    <th>Segment</th>
+                                    <th>Chainage</th>
+                                    <th>Status</th>
+                                    <th>RQI</th>
+                                    <th>Potholes</th>
+                                    <th>Cracks</th>
+                                    <th>Defect Density</th>
+                                    <th>Slope</th>
+                                    <th>Action Recommendation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="9" class="text-center">Run survey to populate segment table</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Tracked Defects Catalog -->
+                <div id="tab-defects" class="tab-pane">
+                    <div class="table-scroll-container">
+                        <table class="data-table" id="defectsTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Type</th>
+                                    <th>Chainage</th>
+                                    <th>Metric Area</th>
+                                    <th>Dimensions (L×W)</th>
+                                    <th>Severity</th>
+                                    <th>Confidence</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="7" class="text-center">No defects logged yet</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tab 4: 5 Solved Industry Gaps -->
+                <div id="tab-gaps" class="tab-pane">
+                    <div class="gaps-list">
+                        <div class="gap-card">
+                            <div class="gap-badge">SOLVED GAP 1</div>
+                            <div class="gap-title">Cost & Hardware Prohibitions (No $100k LiDAR Needed)</div>
+                            <div class="gap-desc">Replaces multi-million dollar survey vans with edge monocular vision & calibrated Inverse Perspective Mapping.</div>
+                        </div>
+
+                        <div class="gap-card">
+                            <div class="gap-badge">SOLVED GAP 2</div>
+                            <div class="gap-title">False Alarms from Tree Shadows & Lane Lines</div>
+                            <div class="gap-desc">Multi-Scale Retinex, CIELAB shadow attenuation, and HSV paint masks reject ambient shadows and road stripes.</div>
+                        </div>
+
+                        <div class="gap-card">
+                            <div class="gap-badge">SOLVED GAP 3</div>
+                            <div class="gap-title">Perspective Distortion & Road Slope Neglect</div>
+                            <div class="gap-desc">Vanishing point tracking estimates dynamic road inclination/grade (%), while IPM homography computes true ground damage in m².</div>
+                        </div>
+
+                        <div class="gap-card">
+                            <div class="gap-badge">SOLVED GAP 4</div>
+                            <div class="gap-title">Frame-Isolated Detections (Eliminating Double Counting)</div>
+                            <div class="gap-desc">Spatial-temporal multi-object tracker links defects across successive frames with persistent IDs and odometry chaining.</div>
+                        </div>
+
+                        <div class="gap-card">
+                            <div class="gap-badge">SOLVED GAP 5</div>
+                            <div class="gap-title">Black-Box Predictions vs. Civil Engineering Indices</div>
+                            <div class="gap-desc">Generates ASTM D6433 & IRC:SP:16 compliant Pavement Condition Index (0-100), Defect Density %, and discrete Good/Fair/Bad ratings.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Report & Export Toolbar -->
+        <footer class="bottom-toolbar">
+            <div class="toolbar-info">
+                <span>Output Engine: <strong>ASTM D6433 Pavement Evaluation</strong></span>
+                <span>Spatial Chaining: <strong>50m Standard Segment Units</strong></span>
+            </div>
+            <div class="export-actions">
+                <a id="linkHtmlReport" href="#" target="_blank" class="btn-tool disabled">
+                    <span>📄</span> View Full Audit HTML Report
+                </a>
+                <a id="linkSegmentsCsv" href="#" download class="btn-tool disabled">
+                    <span>📊</span> Export Segments CSV
+                </a>
+                <a id="linkDefectsCsv" href="#" download class="btn-tool disabled">
+                    <span>📑</span> Export Defects CSV
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

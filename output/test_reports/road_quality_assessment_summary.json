@@ -1,0 +1,63 @@
+{
+  "summary": {
+    "total_survey_distance_m": 100.0,
+    "total_segments_surveyed": 2,
+    "total_unique_potholes": 1,
+    "total_unique_cracks": 1,
+    "total_defect_area_m2": 0.75,
+    "overall_average_rqi": 78.5,
+    "overall_rating": "Fair"
+  },
+  "segments": [
+    {
+      "segment_id": 0,
+      "chainage_start_m": 0,
+      "chainage_end_m": 50,
+      "length_m": 50,
+      "pothole_count": 0,
+      "crack_count": 0,
+      "patch_count": 0,
+      "total_defects": 0,
+      "pothole_area_m2": 0,
+      "crack_area_m2": 0,
+      "total_defect_area_m2": 0,
+      "defect_density_pct": 0,
+      "mean_grade_pct": 1.0,
+      "grade_std_pct": 0.2,
+      "rqi_score": 98.0,
+      "quality_rating": "Good",
+      "action_recommendation": "Routine maintenance"
+    },
+    {
+      "segment_id": 1,
+      "chainage_start_m": 50,
+      "chainage_end_m": 100,
+      "length_m": 50,
+      "pothole_count": 1,
+      "crack_count": 1,
+      "patch_count": 0,
+      "total_defects": 2,
+      "pothole_area_m2": 0.5,
+      "crack_area_m2": 0.25,
+      "total_defect_area_m2": 0.75,
+      "defect_density_pct": 0.21,
+      "mean_grade_pct": 2.0,
+      "grade_std_pct": 0.5,
+      "rqi_score": 59.0,
+      "quality_rating": "Bad",
+      "action_recommendation": "Resurfacing required"
+    }
+  ],
+  "defects": [
+    {
+      "track_id": 1,
+      "type": "pothole",
+      "chainage_distance_m": 65.0,
+      "smoothed_area_m2": 0.5,
+      "smoothed_length_m": 0.8,
+      "smoothed_width_m": 0.7,
+      "severity": 4,
+      "confidence": 0.92
+    }
+  ]
+}

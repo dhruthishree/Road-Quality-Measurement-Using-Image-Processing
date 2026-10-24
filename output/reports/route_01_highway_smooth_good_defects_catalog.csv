@@ -1,0 +1,15 @@
+track_id,type,first_frame,last_frame,frames_tracked,smoothed_area_m2,smoothed_length_m,smoothed_width_m,severity,confidence,chainage_distance_m,is_confirmed
+1,pothole,0,1,2,0.011,0.3,0.1,4,0.92,0.62,False
+5,crack_longitudinal,0,1,2,0.084,0.91,0.25,4,0.87,0.62,False
+14,crack_longitudinal,0,1,2,0.017,0.51,0.12,2,0.87,0.62,False
+34,crack_longitudinal,0,1,2,0.669,1.48,0.77,4,0.87,0.62,False
+3,pothole,0,2,3,0.101,1.01,0.25,5,0.81,0.62,True
+11,crack_alligator,0,3,3,0.321,2.4,0.53,4,0.88,0.62,True
+12,crack_longitudinal,0,3,4,0.013,0.44,0.09,3,0.81,0.62,True
+13,crack_longitudinal,0,3,3,0.008,0.28,0.07,2,0.79,0.62,True
+2,crack_longitudinal,0,4,5,0.025,0.42,0.14,2,0.77,0.62,True
+41,crack_transverse,1,4,4,0.422,2.4,0.45,4,0.85,1.25,True
+9,crack_longitudinal,0,5,6,0.014,0.26,0.18,2,0.83,0.62,True
+10,crack_alligator,0,7,4,0.027,0.79,0.21,4,0.88,0.62,True
+42,crack_transverse,2,7,6,0.011,0.37,0.07,3,0.85,1.88,True
+44,crack_transverse,3,129,125,0.157,5.43,0.05,4,0.85,2.5,True

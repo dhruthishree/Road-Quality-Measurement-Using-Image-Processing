@@ -1,0 +1,3 @@
+segment_id,chainage_start_m,chainage_end_m,length_m,pothole_count,crack_count,patch_count,total_defects,pothole_area_m2,crack_area_m2,total_defect_area_m2,defect_density_pct,mean_grade_pct,grade_std_pct,rqi_score,quality_rating,action_recommendation
+0,0.0,50.0,50.0,1,0,0,1,0.108,0,0.108,0.03,-18.67,2.62,77.2,Fair,Minor distress. Surface crack sealing and micro-surfacing recommended.
+1,50.0,100.0,50.0,1,0,0,1,0.083,0,0.083,0.02,-19.6,1.75,85.4,Good,Pavement in Good condition. Routine preventative maintenance / sweeping.

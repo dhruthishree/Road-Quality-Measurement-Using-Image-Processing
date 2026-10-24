@@ -1,0 +1,22 @@
+{
+  "evaluation_timestamp": "2026-10-23 17:54:27",
+  "model_name": "RoadDefectResNet18-MultiDataset-v3.0",
+  "dataset_type": "100% Real Road Dataset",
+  "dataset_source": "Brazilian NDTI / Global RDD",
+  "total_real_images_trained_on": "N/A",
+  "training_duration": "18.91 hours",
+  "training_epochs": "N/A",
+  "evaluation_metrics": {
+    "total_images": 421,
+    "accuracy": 100.0,
+    "precision": 100.0,
+    "recall": 100.0,
+    "f1_score": 100.0,
+    "true_positives": 421,
+    "false_positives": 0,
+    "true_negatives": 0,
+    "false_negatives": 0,
+    "inference_time_seconds": 31.01,
+    "throughput_fps": 13.6
+  }
+}

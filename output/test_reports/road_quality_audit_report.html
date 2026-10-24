@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Road Quality Audit Report - Continuous Road Survey</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --surface-card: #273549;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #3b82f6;
+            --good: #10b981;
+            --fair: #f59e0b;
+            --bad: #ef4444;
+            --border: #334155;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background: var(--bg); color: var(--text-main); padding: 30px; line-height: 1.5; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 30px; }
+        .header h1 { font-size: 1.9rem; font-weight: 700; color: #fff; }
+        .header p { color: var(--text-muted); font-size: 0.9rem; margin-top: 4px; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-bottom: 30px; }
+        .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .kpi-title { font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+        .kpi-value { font-size: 1.85rem; font-weight: 700; color: #fff; }
+        .rating-badge { display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 1.1rem; font-weight: 800; background: #f59e0b22; color: #f59e0b; border: 1.5px solid #f59e0b; }
+        .section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 30px; }
+        .section-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #fff; display: flex; align-items: center; gap: 8px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; margin-top: 10px; font-size: 0.92rem; }
+        th { background: #162032; padding: 12px 14px; color: var(--text-muted); font-weight: 600; border-bottom: 1px solid var(--border); }
+        td { padding: 12px 14px; border-bottom: 1px solid #28374d; color: #e2e8f0; }
+        tr:hover { background: #253347; }
+        .callout { background: #1a273b; border-left: 4px solid var(--primary); padding: 16px; border-radius: 6px; margin-bottom: 20px; font-size: 0.95rem; }
+        .footer { text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 40px; border-top: 1px solid var(--border); padding-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>Road Quality Measurement & Surface Audit Report</h1>
+                <p>Survey Target: <strong>Continuous Road Survey</strong> | Generated on 2026-10-22 20:19:07</p>
+            </div>
+            <div>
+                <span class="rating-badge">FAIR CONDITION</span>
+            </div>
+        </div>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-title">Overall Road Quality Index (RQI)</div>
+                <div class="kpi-value" style="color: #f59e0b;">78.5 <span style="font-size: 1rem; color: var(--text-muted);">/ 100</span></div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Surveyed Length</div>
+                <div class="kpi-value">100.0 <span style="font-size: 1rem; color: var(--text-muted);">m</span></div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Confirmed Potholes</div>
+                <div class="kpi-value" style="color: #ef4444;">1</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Crack Formations</div>
+                <div class="kpi-value" style="color: #f59e0b;">1</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Total Defect Surface Area</div>
+                <div class="kpi-value">0.75 <span style="font-size: 1rem; color: var(--text-muted);">m²</span></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Civil Engineering Executive Summary & Assessment</div>
+            <div class="callout">
+                <strong>Standard Alignment:</strong> Methodology adheres to ASTM D6433 (Pavement Condition Index) and IRC:SP:16 guidelines.
+                Perspective homography (IPM) eliminates camera foreshortening to compute true metric damage.
+            </div>
+            <p style="color: #cbd5e1; font-size: 0.95rem;">
+                The continuous evaluation over <strong>100.0 meters</strong> classifies this pavement section as <strong>Fair</strong> (Overall RQI Score: <strong>78.5/100</strong>).
+                A total of <strong>1 unique physical surface defects</strong> were verified across <strong>2 discrete chainage segments</strong>.
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Segment-by-Segment Continuous Chainage Log (50m Intervals)</div>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Segment</th>
+                            <th>Chainage Interval</th>
+                            <th>Status</th>
+                            <th>RQI</th>
+                            <th>Potholes</th>
+                            <th>Cracks</th>
+                            <th>Defect Area</th>
+                            <th>Defect Density</th>
+                            <th>Road Grade</th>
+                            <th>Action Plan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+            <tr>
+                <td style="font-weight: 600;">Seg #1</td>
+                <td>0m - 50m</td>
+                <td><span style="display:inline-block; padding: 3px 10px; border-radius: 999px; background: #10b98122; color: #10b981; font-weight:700; border: 1px solid #10b98144;">Good</span></td>
+                <td style="font-weight: 700; font-size: 1.05rem;">98.0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0 m²</td>
+                <td>0%</td>
+                <td>1.0%</td>
+                <td style="font-size: 0.85rem; color: #475569;">Routine maintenance</td>
+            </tr>
+            
+
+            <tr>
+                <td style="font-weight: 600;">Seg #2</td>
+                <td>50m - 100m</td>
+                <td><span style="display:inline-block; padding: 3px 10px; border-radius: 999px; background: #ef444422; color: #ef4444; font-weight:700; border: 1px solid #ef444444;">Bad</span></td>
+                <td style="font-weight: 700; font-size: 1.05rem;">59.0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0.75 m²</td>
+                <td>0.21%</td>
+                <td>2.0%</td>
+                <td style="font-size: 0.85rem; color: #475569;">Resurfacing required</td>
+            </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Physical Defect Catalog & Metric Dimensions</div>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Track ID</th>
+                            <th>Defect Type</th>
+                            <th>Chainage</th>
+                            <th>Metric Area (m²)</th>
+                            <th>Length × Width</th>
+                            <th>Severity</th>
+                            <th>Confidence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+            <tr>
+                <td style="font-weight: 600;">T-001</td>
+                <td>POTHOLE</td>
+                <td>65.0m</td>
+                <td>0.5 m²</td>
+                <td>0.8m × 0.7m</td>
+                <td><span style="font-weight:700; color:#ef4444;">Severity 4/5</span></td>
+                <td>92%</td>
+            </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Engineering Recommendations & Action Protocol</div>
+            <ul style="padding-left: 20px; color: #cbd5e1; line-height: 1.8; font-size: 0.95rem;">
+                <li><strong>Priority Maintenance:</strong> Segments classified as <em>Bad</em> must be scheduled for cold-milling and asphalt overlay within 14 business days.</li>
+                <li><strong>Drainage & Slope Inspection:</strong> Road segments exhibiting dynamic inclination variance (>2.0% grade change) should be audited for localized water ponding and shoulder scour.</li>
+                <li><strong>Preventative Seal:</strong> Moderate fatigue/alligator cracks should receive bituminous emulsion crack sealant before seasonal rains expand cavities into severe potholes.</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            Continuous Road Quality Measurement System | Computer Vision & Image Processing Pipeline v1.0
+        </div>
+    </div>
+</body>
+</html>

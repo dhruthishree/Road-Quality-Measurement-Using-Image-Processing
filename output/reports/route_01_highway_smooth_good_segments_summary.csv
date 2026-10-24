@@ -1,0 +1,3 @@
+segment_id,chainage_start_m,chainage_end_m,length_m,pothole_count,crack_count,patch_count,total_defects,pothole_area_m2,crack_area_m2,total_defect_area_m2,defect_density_pct,mean_grade_pct,grade_std_pct,rqi_score,quality_rating,action_recommendation
+0,0.0,50.0,50.0,0,0,0,0,0,0,0,0.0,-20.06,2.29,90.4,Good,Pavement in Good condition. Routine preventative maintenance / sweeping.
+1,50.0,100.0,50.0,0,0,0,0,0,0,0,0.0,-20.6,0.49,100.0,Good,Pavement in Good condition. Routine preventative maintenance / sweeping.

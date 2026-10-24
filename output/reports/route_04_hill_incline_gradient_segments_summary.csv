@@ -1,0 +1,3 @@
+segment_id,chainage_start_m,chainage_end_m,length_m,pothole_count,crack_count,patch_count,total_defects,pothole_area_m2,crack_area_m2,total_defect_area_m2,defect_density_pct,mean_grade_pct,grade_std_pct,rqi_score,quality_rating,action_recommendation
+0,0.0,50.0,50.0,1,31,0,32,0.025,0.887,0.912,0.26,-53.05,8.46,0.0,Bad,Severe structural distress. Mill surface and apply dense bituminous asphalt overlay.
+1,50.0,100.0,50.0,0,0,0,0,0.0,0.0,0.0,0.0,-65.29,0.47,100.0,Good,Pavement in Good condition. Routine preventative maintenance / sweeping.
